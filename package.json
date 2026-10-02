@@ -1,0 +1,28 @@
+{
+  "name": "highrolers-agency",
+  "private": true,
+  "version": "1.0.0",
+  "description": "HIGHROLERS® — Technology, Automation & High-Performance Growth Agency website (React + Node.js)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.js",
+    "serve": "vite build && node server.js --open"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "express": "^5.2.1",
+    "motion": "^13.5.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.2"
+  }
+}

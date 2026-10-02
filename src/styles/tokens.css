@@ -1,0 +1,31 @@
+/* ==========================================================================
+   HIGHROLERS — DESIGN TOKENS (theme-independent)
+   Colors live in ./themes/*.css; everything here is shared by all themes.
+   ========================================================================== */
+:root {
+  /* Glass panels — fills come from the theme's --glass-rgb channel */
+  --glass-bg-primary: rgb(var(--glass-rgb) / 0.76);
+  --glass-bg-elevated: rgb(var(--glass-rgb) / 0.86);
+  --glass-blur-md: blur(22px) saturate(185%);
+  --glass-blur-lg: blur(30px) saturate(190%);
+  --glass-rim-highlight: inset 0 1px 1px 0 rgb(255 255 255 / calc(0.95 * var(--rim-opacity)));
+  --glass-shadow-ambient: 0 16px 44px -10px rgba(0, 0, 0, 0.05);
+  --glass-shadow-elevated: 0 24px 60px -12px rgba(0, 0, 0, 0.08);
+
+  /* Surfaces that stay dark in every theme (photo badges, footer) */
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: #D4D4D8;
+  --text-on-dark-dim: #888892;
+
+  /* Typography Stacks */
+  --font-display: 'Bebas Neue', 'Anton', 'Syne', sans-serif;
+  --font-subhead: 'Syne', 'Anton', sans-serif;
+  --font-body: 'Work Sans', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout & Motion */
+  --container-max-width: 1360px;
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Primary Meta Tags -->
   <title>HIGHROLERS® — Technology, Automation &amp; High-Performance Growth Agency</title>
   <meta name="title" content="HIGHROLERS® — Technology, Automation &amp; High-Performance Growth Agency">
@@ -16,8 +16,24 @@
   <!-- Geo & Theme -->
   <meta name="geo.region" content="IN-BR">
   <meta name="geo.placename" content="Patna">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Theme boot: set data-theme before first paint so there is no light/dark flash.
+       Mirrors THEME_STORAGE_KEY / FOLLOW_SYSTEM / metaColor in src/data/themes.js. -->
+  <script>
+    (function () {
+      var theme;
+      try { theme = localStorage.getItem('highrolers-theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0A0A0C');
+      }
+    })();
+  </script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="HIGHROLERS®">
@@ -25,7 +41,7 @@
   <meta property="og:url" content="http://127.0.0.1:8080/">
   <meta property="og:title" content="HIGHROLERS® — Technology, Automation &amp; Growth Agency">
   <meta property="og:description" content="We build, automate, optimize and grow businesses. End-to-end digital solutions from workflow automation to high-performance media. #WEDO THEWORK.">
-  <meta property="og:image" content="assets/starmedia_bw/highrolers_horizontal_black.png">
+  <meta property="og:image" content="/assets/starmedia_bw/highrolers_horizontal_black.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
@@ -35,18 +51,16 @@
   <meta name="twitter:url" content="http://127.0.0.1:8080/">
   <meta name="twitter:title" content="HIGHROLERS® — Technology, Automation &amp; Growth Agency">
   <meta name="twitter:description" content="We build, automate, optimize and grow businesses with automation, custom development, and performance marketing.">
-  <meta name="twitter:image" content="assets/starmedia_bw/highrolers_horizontal_black.png">
+  <meta name="twitter:image" content="/assets/starmedia_bw/highrolers_horizontal_black.png">
 
   <!-- Favicon & Apple Touch Icons (Extracted from official PDF logo) -->
-  <link rel="icon" type="image/png" sizes="128x128" href="assets/starmedia_bw/favicon_128.png">
-  <link rel="apple-touch-icon" href="assets/starmedia_bw/favicon_128.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/starmedia_bw/favicon_128.png">
+  <link rel="apple-touch-icon" href="/assets/starmedia_bw/favicon_128.png">
 
-  <!-- Google Fonts: Anton, Syne, Work Sans, JetBrains Mono, Plus Jakarta Sans -->
+  <!-- Google Fonts: Anton, Bebas Neue, Syne, Work Sans, JetBrains Mono, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css">
 
   <!-- Schema.org JSON-LD Structured Data for Rich Search Results -->
   <script type="application/ld+json">
@@ -141,503 +155,7 @@
   </script>
 </head>
 <body class="theme-highrolers">
-
-  <!-- Noise and Ambient Grain Overlay -->
-  <div class="dither-noise-overlay"></div>
-
-  <!-- Ambient Liquid Glass Atmosphere Layer (Refraction Depth for Frosted Glass Panels) -->
-  <div class="glass-ambient-atmosphere" aria-hidden="true">
-    <div class="glass-ambient-orb orb-1"></div>
-    <div class="glass-ambient-orb orb-2"></div>
-    <div class="glass-ambient-orb orb-3"></div>
-    <div class="glass-ambient-orb orb-4"></div>
-  </div>
-
-  <!-- Custom Pixel Arrow Cursor System (Retro 8-bit Arrow + Companion Reticle) -->
-  <div class="custom-pixel-cursor-system" id="customCursorSystem" aria-hidden="true">
-    <!-- Companion Target Reticle / Orbital Brackets -->
-    <div class="cursor-companion-reticle" id="cursorReticle">
-      <span class="reticle-corner r-tl"></span>
-      <span class="reticle-corner r-tr"></span>
-      <span class="reticle-corner r-bl"></span>
-      <span class="reticle-corner r-br"></span>
-    </div>
-    <!-- 8-Bit Pixel Arrow Pointer -->
-    <div class="custom-pixel-cursor" id="customCursor">
-      <img src="assets/starmedia_bw/custom_pixel_cursor.svg" alt="" class="pixel-cursor-img" id="pixelCursorImg" width="23" height="40">
-    </div>
-    <!-- Click Shockwave Burst Container -->
-    <div class="cursor-shockwave-container" id="cursorShockwaveContainer"></div>
-  </div>
-
-  <!-- Audio Feedback & Toast Notification -->
-  <div class="highrolers-toast" id="systemToast" role="alert" aria-live="polite">
-    <span class="toast-bracket">[</span>
-    <span class="toast-msg" id="toastMessage">SYSTEM READY // HIGHROLERS INITIALIZED</span>
-    <span class="toast-bracket">]</span>
-  </div>
-
-  <!-- ==========================================================================
-       PRIMARY HEADER (APPLE FROSTED GLASS & FLOATING NAVIGATION PILL DOCK)
-       ========================================================================== -->
-  <header class="main-nav-header" id="mainHeader">
-    <div class="container flex-between header-nav-container">
-      <!-- Official Brand Logo from highrolers.pdf -->
-      <a href="#hero" class="brand-logo-group" aria-label="HIGHROLERS Home">
-        <img src="assets/starmedia_bw/highrolers_mark_black.png" alt="HIGHROLERS Mark" class="header-logo-mark">
-        <img src="assets/starmedia_bw/highrolers_wordmark_black.png" alt="HIGHROLERS" class="header-logo-wordmark">
-      </a>
-
-      <!-- Floating Animated Navigation Pill Dock -->
-      <nav class="nav-pill-dock" id="navPillDock" aria-label="Main Navigation">
-        <div class="nav-gliding-pill" id="navGlidingPill" aria-hidden="true"></div>
-        <a href="#hero" class="nav-pill-btn active" data-nav="hero" data-i18n="nav_home">HOME</a>
-        <a href="#methodology" class="nav-pill-btn" data-nav="methodology" data-i18n="nav_about">PHILOSOPHY</a>
-        <a href="#services" class="nav-pill-btn" data-nav="services" data-i18n="nav_services">CAPABILITIES</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- ==========================================================================
-         SECTION 01: HERO SECTION ("MARKETING THAT SELLS")
-         ========================================================================== -->
-    <section class="hero-section" id="hero">
-      <!-- Background Ambient Glow & Grid -->
-      <div class="hero-ambient-glow"></div>
-      
-      <div class="container hero-container">
-        <!-- Middle Slogan & Massive Heading -->
-        <div class="hero-headline-block">
-          <div class="hero-hashtag-wrap">
-            <span class="hero-hashtag">WE HELP</span>
-            <span class="hero-hashtag">TO</span>
-          </div>
-          <h1 class="hero-main-title" data-i18n="hero_title">
-            CREATE WITHOUT LIMITS
-          </h1>
-        </div>
-
-        <!-- Full-Width Dithered Audience Banner -->
-        <div class="hero-audience-frame bracket-box" id="audienceBanner">
-          <span class="corner-tl"></span><span class="corner-tr"></span>
-          <span class="corner-bl"></span><span class="corner-br"></span>
-          <div class="audience-img-container">
-            <img src="assets/starmedia_bw/crowd_bw.png" alt="Highrolers Audience - Create Without Limits" class="audience-img">
-            <div class="audience-scanline-effect"></div>
-            <div class="audience-overlay-badge">
-              <span class="badge-text">HIGH-CONVERSION CONSUMER TARGETING // 360° IMMERSION</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interactive Animated Canvas Pixel Matrix Ribbon -->
-        <div class="pixel-matrix-ribbon-wrap">
-          <canvas id="pixelMatrixCanvas" class="pixel-matrix-canvas" width="1400" height="120"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 02: PHILOSOPHY & METHODOLOGY ("HOW WE MULTIPLY DIGITAL REVENUE")
-         ========================================================================== -->
-    <section class="methodology-section" id="methodology">
-      <div class="container">
-        <!-- Section Container with Corner Brackets -->
-        <div class="methodology-main-frame bracket-box">
-          <span class="corner-tl"></span><span class="corner-tr"></span>
-          <span class="corner-bl"></span><span class="corner-br"></span>
-
-          <!-- Top Meta Label -->
-          <div class="methodology-meta-row">
-            <span class="section-tag">[ HOW WE DO THE WORK ]</span>
-            <span class="section-tag hide-mobile">[ PROPRIETARY GROWTH ARCHITECTURE ]</span>
-          </div>
-
-          <!-- Main Split Editorial Title -->
-          <div class="methodology-title-layout">
-            <div class="title-col-top">
-              <h2 class="editorial-headline" data-i18n="meth_head_1">
-                HOW WE MULTIPLY
-              </h2>
-            </div>
-
-            <div class="title-col-split">
-              <div class="split-side-left">
-                <p class="methodology-desc" data-i18n="meth_desc_left">
-                  WE COMBINE ENGINEERING, CREATIVE PRODUCTION, AND PERFORMANCE DATA FOR A SINGLE OBJECTIVE: SCALING YOUR BRAND REVENUE.
-                </p>
-                <div class="editorial-subheadline" data-i18n="meth_subhead_1">
-                  OUR CLIENTS &amp;
-                </div>
-              </div>
-
-              <!-- Animated 3D Pixel Smiley Icon -->
-              <div class="pixel-smiley-container" id="pixelSmileyBox">
-                <div class="smiley-glow-bg"></div>
-                <img src="assets/starmedia_bw/smiley_bw.png" alt="Pixel Icon" class="pixel-smiley-img" id="pixelSmileyImg">
-                <div class="smiley-interact-label">[ CLICK TO CHARGE ]</div>
-              </div>
-
-              <div class="split-side-right">
-                <div class="editorial-subheadline right-aligned" data-i18n="meth_head_2">
-                  DIGITAL REVENUE FOR
-                </div>
-                <p class="methodology-desc right-desc" data-i18n="meth_desc_right">
-                  EXECUTED WITH SURGICAL PRECISION TO ACHIEVE EMOTIONAL RESONANCE, FRICTIONLESS CONVERSION, AND REAL BOTTOM-LINE IMPACT.
-                </p>
-                <div class="editorial-subheadline right-aligned" data-i18n="meth_subhead_2">
-                  GROWTH PARTNERS
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3 Process Columns / Cards -->
-          <div class="process-cards-grid">
-            <!-- Card 01: Result-Driven Methodology -->
-            <div class="process-card bracket-box hover-lift" data-card="1">
-              <span class="corner-tl"></span><span class="corner-tr"></span>
-              <span class="corner-bl"></span><span class="corner-br"></span>
-              <div class="process-card-header">
-                <h3 class="card-title" data-i18n="card1_title">RESULT-DRIVEN METHODOLOGY</h3>
-                <span class="card-tag">[ 01 ]</span>
-              </div>
-              <div class="card-visual-area">
-                <img src="assets/starmedia_bw/poster1_graphic.png" alt="Matrix Dither Cloud" class="card-glyph-img">
-              </div>
-              <div class="card-footer-info">
-                <p class="card-body-text" data-i18n="card1_desc">
-                  A DOMINANT BRAND IS BORN FROM RIGOROUS STRATEGIC ROADMAPPING, UNAMBIGUOUS ATTRIBUTION, AND RAPID ITERATION CYCLES.
-                </p>
-                <span class="card-brand-mark">HIGHROLERS</span>
-              </div>
-            </div>
-
-            <!-- Card 02: Purposeful Brand Building -->
-            <div class="process-card bracket-box hover-lift light-card" data-card="2">
-              <span class="corner-tl"></span><span class="corner-tr"></span>
-              <span class="corner-bl"></span><span class="corner-br"></span>
-              <div class="process-card-header">
-                <h3 class="card-title" data-i18n="card2_title">PURPOSE-BUILT BRAND ARCHITECTURE</h3>
-                <span class="card-tag">[ 02 ]</span>
-              </div>
-              <div class="card-visual-area">
-                <img src="assets/starmedia_bw/poster2_graphic_white.png" alt="Glitch Hourglass" class="card-glyph-img">
-              </div>
-              <div class="card-footer-info">
-                <p class="card-body-text" data-i18n="card2_desc">
-                  WE ENGINEER BRANDS THAT FORGE LASTING EMOTIONAL BONDS, DEFEND PRICING POWER, AND TRANSCEND GEOGRAPHIC BORDERS.
-                </p>
-                <span class="card-brand-mark">HIGHROLERS</span>
-              </div>
-            </div>
-
-            <!-- Card 03: Scalable Performance Media -->
-            <div class="process-card bracket-box hover-lift" data-card="3">
-              <span class="corner-tl"></span><span class="corner-tr"></span>
-              <span class="corner-bl"></span><span class="corner-br"></span>
-              <div class="process-card-header">
-                <h3 class="card-title" data-i18n="card3_title">SCALABLE PERFORMANCE MEDIA</h3>
-                <span class="card-tag">[ 03 ]</span>
-              </div>
-              <div class="card-visual-area">
-                <img src="assets/starmedia_bw/poster3_graphic.png" alt="Isometric 3D Cube" class="card-glyph-img">
-              </div>
-              <div class="card-footer-info">
-                <p class="card-body-text" data-i18n="card3_desc">
-                  MULTI-CHANNEL PAID ACQUISITION (META, GOOGLE, TIKTOK, PROGRAMMATIC) BACKED BY SCIENTIFIC CRO TESTING AND ALGORITHMIC BIDDING.
-                </p>
-                <span class="card-brand-mark">HIGHROLERS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Chevron Progress Indicator -->
-          <div class="process-chevron-wrap text-center">
-            <div class="pixel-chevron-arrow">
-              <span>»»»</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 03: CAPABILITIES & SERVICES (FROM HIGHROLERS PDF)
-         ========================================================================== -->
-    <section class="services-section" id="services">
-      <div class="container">
-        <div class="services-main-frame bracket-box">
-          <span class="corner-tl"></span><span class="corner-tr"></span>
-          <span class="corner-bl"></span><span class="corner-br"></span>
-
-          <!-- Header -->
-          <div class="services-header-row">
-            <div class="services-title-left">
-              <span class="section-tag">[ SERVICES WE DELIVER ]</span>
-              <h2 class="editorial-headline-services" data-i18n="serv_title">
-                CAPABILITIES THAT<br>DRIVE
-              </h2>
-            </div>
-
-            <!-- Pegasus Emblem in Center -->
-            <div class="services-pegasus-wrap">
-              <img src="assets/starmedia_bw/pegasus_bw.png" alt="Highrolers Pegasus Emblem" class="pegasus-img">
-            </div>
-
-            <div class="services-title-right">
-              <h2 class="editorial-headline-services right-text" data-i18n="serv_title_2">
-                MEASURABLE GROWTH
-              </h2>
-              <p class="services-subtitle-desc" data-i18n="serv_subtitle">
-                COMBINING ENGINEERING, CREATIVE AGILITY, AND PERFORMANCE MEDIA TO SCALE YOUR ENTERPRISE REVENUE.
-              </p>
-            </div>
-          </div>
-
-          <!-- Interactive Expandable Services Accordion / List (From PDF) -->
-          <div class="services-interactive-list" id="servicesAccordion">
-            
-            <!-- Service 01: BUSINESS & WORKFLOW AUTOMATION -->
-            <div class="service-row-item" data-service="1">
-              <div class="service-row-header">
-                <div class="service-num-wrap">
-                  <span class="service-num">01</span>
-                  <h3 class="service-name">BUSINESS &amp; WORKFLOW AUTOMATION</h3>
-                </div>
-                <button type="button" class="service-arrow-wrap" aria-label="Toggle Business & Workflow Automation">
-                  <svg class="service-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="service-expand-content">
-                <div class="service-content-grid">
-                  <div class="service-desc-text" data-i18n="serv_1_desc">
-                    Our flagship capability. Work smarter. Move faster. We eliminate repetitive manual work by connecting the software tools your business uses into seamless, automated pipelines: Form → Database → Notification → CRM → Follow-up. Less manual errors, faster operations, and more time for revenue growth.
-                  </div>
-                  <div class="service-tags-list">
-                    <button type="button" class="pill-tag">Lead Qualification</button>
-                    <button type="button" class="pill-tag">WhatsApp Workflows</button>
-                    <button type="button" class="pill-tag">CRM Automation</button>
-                    <button type="button" class="pill-tag">Document Processing</button>
-                    <button type="button" class="pill-tag">Notification Engines</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Service 02: CUSTOM WEBSITES & DIGITAL PLATFORMS -->
-            <div class="service-row-item" data-service="2">
-              <div class="service-row-header">
-                <div class="service-num-wrap">
-                  <span class="service-num">02</span>
-                  <h3 class="service-name">CUSTOM WEBSITES &amp; DIGITAL PLATFORMS</h3>
-                </div>
-                <button type="button" class="service-arrow-wrap" aria-label="Toggle Custom Websites & Digital Platforms">
-                  <svg class="service-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="service-expand-content">
-                <div class="service-content-grid">
-                  <div class="service-desc-text" data-i18n="serv_2_desc">
-                    We design and build your digital headquarters. Enterprise web applications, customer portals, corporate platforms, and SaaS interfaces built with modern web technologies, military-grade security, and extreme conversion speed. More than websites — functional digital systems tailored to your business.
-                  </div>
-                  <div class="service-tags-list">
-                    <button type="button" class="pill-tag">Web Applications</button>
-                    <button type="button" class="pill-tag">Customer Portals</button>
-                    <button type="button" class="pill-tag">Interactive Dashboards</button>
-                    <button type="button" class="pill-tag">API Integrations</button>
-                    <button type="button" class="pill-tag">High-Security Hosting</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Service 03: MOBILE APP DEVELOPMENT (iOS & ANDROID) -->
-            <div class="service-row-item active" data-service="3">
-              <div class="service-row-header">
-                <div class="service-num-wrap">
-                  <span class="service-num">03</span>
-                  <h3 class="service-name">MOBILE APP DEVELOPMENT (iOS &amp; ANDROID)</h3>
-                </div>
-                <button type="button" class="service-arrow-wrap" aria-label="Toggle Mobile App Development">
-                  <svg class="service-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="service-expand-content">
-                <div class="service-content-grid">
-                  <div class="service-desc-text" data-i18n="serv_3_desc">
-                    Turn your concept into an intuitive mobile experience. From MVP validation to full-scale cross-platform iOS and Android apps with secure authentication, cloud databases, booking flows, and real-time push notification engines designed for fluid user adoption.
-                  </div>
-                  <div class="service-tags-list">
-                    <button type="button" class="pill-tag">iOS &amp; Android Native</button>
-                    <button type="button" class="pill-tag">Cross-Platform Apps</button>
-                    <button type="button" class="pill-tag">MVP Prototyping</button>
-                    <button type="button" class="pill-tag">Real-Time Cloud APIs</button>
-                    <button type="button" class="pill-tag">Payment Gateways</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Service 04: INTELLIGENT AI SYSTEMS & AUTOMATION -->
-            <div class="service-row-item" data-service="4">
-              <div class="service-row-header">
-                <div class="service-num-wrap">
-                  <span class="service-num">04</span>
-                  <h3 class="service-name">INTELLIGENT AI SYSTEMS &amp; AUTOMATION</h3>
-                </div>
-                <button type="button" class="service-arrow-wrap" aria-label="Toggle Intelligent AI Systems & Automation">
-                  <svg class="service-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="service-expand-content">
-                <div class="service-content-grid">
-                  <div class="service-desc-text" data-i18n="serv_4_desc">
-                    Bring intelligence into your daily operations. We build custom AI assistants, automated internal knowledge bases, AI document analysis, and smart lead routing. AI understands. Automation executes. Your business scales.
-                  </div>
-                  <div class="service-tags-list">
-                    <button type="button" class="pill-tag">AI Strategy</button>
-                    <button type="button" class="pill-tag">Custom AI Chatbots</button>
-                    <button type="button" class="pill-tag">Knowledge Retrieval</button>
-                    <button type="button" class="pill-tag">Automated Research</button>
-                    <button type="button" class="pill-tag">Predictive BI</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Service 05: PERFORMANCE MEDIA & ROAS ACCELERATOR -->
-            <div class="service-row-item" data-service="5">
-              <div class="service-row-header">
-                <div class="service-num-wrap">
-                  <span class="service-num">05</span>
-                  <h3 class="service-name">PERFORMANCE MEDIA &amp; ROAS ACCELERATOR</h3>
-                </div>
-                <button type="button" class="service-arrow-wrap" aria-label="Toggle Performance Media & ROAS Accelerator">
-                  <svg class="service-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="service-expand-content">
-                <div class="service-content-grid">
-                  <div class="service-desc-text" data-i18n="serv_5_desc">
-                    Your brand in front of the right customer at the exact moment of intent. Full-funnel media acquisition across Meta Ads, Google Search &amp; Performance Max, YouTube, and TikTok with scientific testing and aggressive ROAS governance.
-                  </div>
-                  <div class="service-tags-list">
-                    <button type="button" class="pill-tag">Meta Ads Scaling</button>
-                    <button type="button" class="pill-tag">Google Search &amp; PMax</button>
-                    <button type="button" class="pill-tag">TikTok Performance</button>
-                    <button type="button" class="pill-tag">Multivariate Testing</button>
-                    <button type="button" class="pill-tag">ROAS Governance</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 04: STUDIO & ENVIRONMENT SHOWCASE
-         ========================================================================== -->
-    <section class="studio-showcase-section">
-      <div class="container">
-        <div class="studio-frame bracket-box">
-          <span class="corner-tl"></span><span class="corner-tr"></span>
-          <span class="corner-bl"></span><span class="corner-br"></span>
-          <video class="studio-video" autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" poster="assets/starmedia_bw/office_studio.png">
-            <source src="assets/video/office.mp4" type="video/mp4">
-            <source src="assets/starmedia_bw/office.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pixel Dither Divider Ribbon -->
-    <div class="footer-pixel-divider-wrap">
-      <img src="assets/starmedia_bw/pixel_dither_bw.png" alt="Pixel Matrix Divider" class="pixel-ribbon-img">
-    </div>
-  </main>
-
-  <!-- ==========================================================================
-       FOOTER SECTION (BRAND WATERMARK, OFFICES, SOCIALS, LEGAL)
-       ========================================================================== -->
-  <footer class="main-footer" id="footer">
-    <div class="container">
-      <!-- 4 Column Information Grid -->
-      <div class="footer-info-grid">
-        
-        <!-- Address from PDF (Pure Address, No Map Integration) -->
-        <div class="footer-col footer-col-address">
-          <h4 class="footer-col-title" data-i18n="footer_title_2">ADDRESS</h4>
-          <div class="office-locations-list">
-            <div class="office-item">
-              <span class="city-name">PATNA</span>
-              <span class="office-addr">PATNA RURAL, BIHAR, INDIA</span>
-              <span class="office-addr" style="font-size: 0.78rem; color: #999999; font-family: var(--font-mono); margin-top: 4px; letter-spacing: 0.05em;">PIN: 800014</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Col 4: Rotating Circular Seal Badge -->
-        <div class="footer-col text-center-mobile">
-          <div class="footer-seal-wrap">
-            <div class="seal-rotating">
-              <svg viewBox="0 0 160 160" class="seal-svg">
-                <path id="footerSealPath" d="M 80, 80 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0" fill="none"/>
-                <text font-size="8.8" font-weight="700" letter-spacing="2" fill="#ffffff">
-                  <textPath href="#footerSealPath" startOffset="0%">
-                    BUILD SOMETHING SMARTER • HIGH ROLLERS •
-                  </textPath>
-                </text>
-              </svg>
-              <div class="seal-inner-star">✦</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Massive Brand Edge-to-Edge Typography & Official PDF Logo Integration -->
-      <div class="footer-giant-brand-wrap">
-        <img src="assets/starmedia_bw/highrolers_horizontal_white.png" alt="HIGHROLERS®" class="footer-official-logo-img">
-      </div>
-
-      <!-- Legal & Copyright Bar -->
-      <div class="footer-bottom-bar flex-between">
-        <div class="copyright-text" data-i18n="footer_copy">
-          © 2026 HIGHROLERS® • ALL RIGHTS RESERVED
-        </div>
-        <div class="global-seal-icon">
-          <span>🌐</span>
-        </div>
-        <div class="legal-links">
-          <a href="#" class="legal-anchor">TERMS OF SERVICE</a>
-          <span class="sep">•</span>
-          <a href="#" class="legal-anchor">PRIVACY POLICY</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/app.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

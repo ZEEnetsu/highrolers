@@ -1,0 +1,161 @@
+/* --------------------------------------------------------------------------
+   LAYOUT HELPERS
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.w-100 { width: 100%; }
+
+/* --------------------------------------------------------------------------
+   BRACKET BOX FRAMEWORK & GLASS PANELS
+   -------------------------------------------------------------------------- */
+.bracket-box {
+  position: relative;
+  border: 1px solid var(--border-strong);
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  box-shadow: var(--glass-rim-highlight), var(--glass-shadow-ambient);
+  transition: all var(--transition-smooth);
+}
+
+.bracket-box:hover {
+  background: var(--glass-bg-elevated);
+  box-shadow: var(--glass-rim-highlight), var(--glass-shadow-elevated);
+}
+
+.glass-panel {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  border: 1px solid rgb(var(--ink-rgb) / 0.12);
+  box-shadow: var(--glass-rim-highlight), var(--glass-shadow-ambient);
+  border-radius: 8px;
+  transition: all var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  background: var(--glass-bg-elevated);
+  box-shadow: var(--glass-rim-highlight), var(--glass-shadow-elevated);
+}
+
+.bracket-box .corner-tl,
+.bracket-box .corner-tr,
+.bracket-box .corner-bl,
+.bracket-box .corner-br {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.bracket-box .corner-tl {
+  top: -1px;
+  left: -1px;
+  border-top: 3px solid var(--bracket-color);
+  border-left: 3px solid var(--bracket-color);
+}
+
+.bracket-box .corner-tr {
+  top: -1px;
+  right: -1px;
+  border-top: 3px solid var(--bracket-color);
+  border-right: 3px solid var(--bracket-color);
+}
+
+.bracket-box .corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 3px solid var(--bracket-color);
+  border-left: 3px solid var(--bracket-color);
+}
+
+.bracket-box .corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 3px solid var(--bracket-color);
+  border-right: 3px solid var(--bracket-color);
+}
+
+/* Dark Inverted Bracket Box */
+.bracket-box.light-card,
+.bracket-box.dark-inverted {
+  background: rgb(var(--inverse-rgb));
+  color: var(--text-on-inverse);
+  border-color: var(--inverse-solid);
+}
+
+.bracket-box.light-card .corner-tl,
+.bracket-box.dark-inverted .corner-tl {
+  border-top-color: var(--text-on-inverse);
+  border-left-color: var(--text-on-inverse);
+}
+.bracket-box.light-card .corner-tr,
+.bracket-box.dark-inverted .corner-tr {
+  border-top-color: var(--text-on-inverse);
+  border-right-color: var(--text-on-inverse);
+}
+.bracket-box.light-card .corner-bl,
+.bracket-box.dark-inverted .corner-bl {
+  border-bottom-color: var(--text-on-inverse);
+  border-left-color: var(--text-on-inverse);
+}
+.bracket-box.light-card .corner-br,
+.bracket-box.dark-inverted .corner-br {
+  border-bottom-color: var(--text-on-inverse);
+  border-right-color: var(--text-on-inverse);
+}
+
+/* --------------------------------------------------------------------------
+   TAGS
+   -------------------------------------------------------------------------- */
+.bracket-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-strong);
+  padding: 4px 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-strong);
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   THEMING
+   -------------------------------------------------------------------------- */
+/* Black-on-transparent artwork that should flip to white in dark themes */
+.theme-graphic {
+  filter: var(--graphic-invert);
+}
+
+/* --------------------------------------------------------------------------
+   SHARED KEYFRAMES
+   -------------------------------------------------------------------------- */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

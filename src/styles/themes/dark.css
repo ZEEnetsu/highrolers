@@ -1,0 +1,61 @@
+/* ==========================================================================
+   DARK THEME — inverted editorial: obsidian page, white ink, smoked glass
+   Same token names as light.css; only the values change.
+   ========================================================================== */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Page */
+  --bg-page: #0A0A0C;
+  --bg-surface: #111114;
+  --hero-dot-color: rgba(255, 255, 255, 0.08);
+  --selection-bg: #FFFFFF;
+  --selection-text: #000000;
+
+  /* Text */
+  --text-strong: #FFFFFF;
+  --text-primary: #F4F4F5;
+  --text-secondary: #C4C4CC;
+  --text-muted: #9A9AA4;
+  --text-dim: #74747E;
+  --nav-text: #B4B4BC;
+
+  /* Lines */
+  --border-strong: rgba(255, 255, 255, 0.62);
+  --bracket-color: #FFFFFF;
+
+  /* Channels */
+  --glass-rgb: 20 20 24;
+  --ink-rgb: 255 255 255;
+  --rim-opacity: 0.1;
+
+  /* Inverse surfaces flip to white */
+  --inverse-rgb: 245 245 247;
+  --inverse-solid: #FFFFFF;
+  --on-inverse-rgb: 0 0 0;
+  --text-on-inverse: #000000;
+  --text-on-inverse-muted: #3F3F46;
+
+  /* Controls */
+  --control-bg: #121216;
+
+  /* Service accordion */
+  --row-hover-bg: rgba(255, 255, 255, 0.04);
+  --row-active-bg: rgba(255, 255, 255, 0.06);
+  --drawer-bg: rgba(255, 255, 255, 0.045);
+
+  /* Footer — a touch darker than the page, separated by its top border */
+  --footer-bg: #000000;
+  --footer-border: #222228;
+  --footer-divider: #222226;
+
+  /* Atmosphere */
+  --orb-1: radial-gradient(circle, rgba(118, 126, 160, 0.20) 0%, rgba(80, 86, 112, 0.07) 55%, transparent 70%);
+  --orb-2: radial-gradient(circle, rgba(104, 112, 146, 0.16) 0%, rgba(70, 76, 100, 0.06) 60%, transparent 70%);
+  --orb-3: radial-gradient(circle, rgba(124, 130, 160, 0.14) 0%, rgba(80, 86, 110, 0.05) 60%, transparent 70%);
+  --orb-4: radial-gradient(circle, rgba(110, 118, 150, 0.12) 0%, transparent 70%);
+  --noise-opacity: 0.05;
+  --noise-blend: screen;
+
+  --graphic-invert: invert(1);
+}

@@ -1,0 +1,11 @@
+/* Global layer — component styles live next to each component */
+@import "tailwindcss";
+@import './themes/light.css';
+@import './themes/dark.css';
+@import './themes/transition.css';
+@import './tokens.css';
+@import './base.css';
+@import './utilities.css';
+
+/* Tailwind `dark:` utilities follow the site toggle instead of the OS setting */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));

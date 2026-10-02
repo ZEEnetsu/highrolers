@@ -1,0 +1,20 @@
+/* ==========================================================================
+   THEME SWITCH TRANSITION
+   The new theme is revealed by a circle expanding from the toggle
+   (View Transitions API, driven from src/utils/themeTransition.js).
+   ========================================================================== */
+
+/* Turn off the default cross-fade so only the circular clip animates */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* While switching, CSS color transitions would smear inside the reveal — freeze them */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}

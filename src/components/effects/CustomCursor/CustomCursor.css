@@ -1,0 +1,179 @@
+/* Hide the OS cursor on pointer:fine devices so no system arrow or text I-beam flashes */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* Master Custom Cursor System Container */
+.custom-pixel-cursor-system {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999999;
+  display: none;
+}
+
+@media (pointer: fine) {
+  .custom-pixel-cursor-system {
+    display: block;
+  }
+}
+
+/* The Primary 8-Bit Pixel Arrow (Instant 1:1 Hardware-Accelerated Tracking) */
+.custom-pixel-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 23px;
+  height: 40px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-9999px, -9999px, 0);
+  will-change: transform;
+  transition: opacity 0.18s ease-out;
+}
+
+.custom-pixel-cursor.visible {
+  opacity: 1;
+}
+
+.pixel-cursor-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transform-origin: 0 0;
+  filter: var(--graphic-invert) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              filter 0.15s ease;
+}
+
+/* HOVER: Dynamic Pointer Tilt (-9deg) & Micro-Scale Bounce */
+.custom-pixel-cursor-system.hovering .pixel-cursor-img {
+  transform: scale(1.2) rotate(-9deg);
+  filter: var(--graphic-invert) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+}
+
+/* CLICK: Tactile Mechanical Keypress Recoil */
+.custom-pixel-cursor-system.active .pixel-cursor-img {
+  transform: scale(0.88) translate(1px, 2px);
+  filter: var(--graphic-invert) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  transition-duration: 0.04s;
+}
+
+/* COMPANION RETICLE: Cyber Bracket Follower with Smooth Fluid Physics */
+.cursor-companion-reticle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  margin-left: -4px;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, width, height, opacity;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease;
+}
+
+.custom-pixel-cursor-system.visible .cursor-companion-reticle {
+  opacity: 0.5;
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-color: var(--text-strong);
+  border-style: solid;
+  transition: all 0.2s ease;
+}
+
+.reticle-corner.r-tl {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+}
+.reticle-corner.r-tr {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+}
+.reticle-corner.r-bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+}
+.reticle-corner.r-br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* Reticle on hover: expands into 36px framing brackets */
+.custom-pixel-cursor-system.hovering .cursor-companion-reticle {
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  margin-left: -18px;
+  opacity: 0.85;
+}
+
+.custom-pixel-cursor-system.hovering .reticle-corner {
+  width: 8px;
+  height: 8px;
+  border-color: var(--text-strong);
+}
+
+/* Reticle over surfaces that are always dark (photo, footer): white brackets */
+.custom-pixel-cursor-system.on-dark .reticle-corner {
+  border-color: #ffffff;
+}
+
+/* Reticle over inverse surfaces (chips, featured card, active controls) */
+.custom-pixel-cursor-system.on-inverse .reticle-corner {
+  border-color: var(--text-on-inverse);
+}
+
+/* RETRO PIXEL CLICK BURST PARTICLES */
+.cursor-shockwave-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999998;
+  overflow: hidden;
+}
+
+.pixel-burst-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: var(--text-strong);
+  border: 1px solid var(--bg-page);
+  pointer-events: none;
+  image-rendering: pixelated;
+  animation: pixelBurstAnim 0.36s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+}
+
+@keyframes pixelBurstAnim {
+  0% {
+    transform: translate(0, 0) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+  }
+}

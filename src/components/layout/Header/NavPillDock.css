@@ -1,0 +1,85 @@
+/* --------------------------------------------------------------------------
+   FLOATING NAVIGATION PILL DOCK (SPRING PHYSICS)
+   -------------------------------------------------------------------------- */
+.nav-pill-dock {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgb(var(--ink-rgb) / 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--ink-rgb) / 0.06);
+  border-radius: 980px;
+  padding: 4px 6px;
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / calc(0.9 * var(--rim-opacity))), 0 2px 8px rgba(0, 0, 0, 0.02);
+  gap: 2px;
+  isolation: isolate;
+}
+
+/* Gliding highlight — lives inside the highlighted button; Motion animates the hand-off */
+.nav-gliding-pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(var(--ink-rgb) / 0.085);
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / calc(0.8 * var(--rim-opacity))), 0 2px 6px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.nav-pill-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.80rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: 7px 18px;
+  border-radius: 980px;
+  transition: color 180ms ease, transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.nav-pill-btn:hover {
+  color: var(--text-strong);
+}
+
+.nav-pill-btn:active {
+  transform: scale(0.94);
+}
+
+.nav-pill-btn.active {
+  color: var(--text-strong);
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — phones
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .nav-pill-dock {
+    padding: 3px 4px;
+  }
+
+  .nav-pill-btn {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    padding: 6px 9px;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-pill-btn {
+    font-size: 0.56rem;
+    padding: 5px 6px;
+  }
+}

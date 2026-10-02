@@ -1,0 +1,13 @@
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for glyph overshoot so the mask doesn't clip the baseline */
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.word-inner {
+  display: inline-block;
+  will-change: transform;
+}

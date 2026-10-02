@@ -1,0 +1,65 @@
+/* ==========================================================================
+   LIGHT THEME — the original high-contrast editorial look (default)
+
+   "-rgb" tokens are space-separated channels, used as rgb(var(--x) / alpha)
+   so every component keeps its own opacity while the theme picks the color.
+   ========================================================================== */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Page */
+  --bg-page: #FFFFFF;
+  --bg-surface: #FAFAFC;
+  --hero-dot-color: #E5E7EB;
+  --selection-bg: #000000;
+  --selection-text: #FFFFFF;
+
+  /* Text */
+  --text-strong: #000000;
+  --text-primary: #0A0A0A;
+  --text-secondary: #2E2E32;
+  --text-muted: #55555C;
+  --text-dim: #888892;
+  --nav-text: #3E3E42;
+
+  /* Lines */
+  --border-strong: #000000;
+  --bracket-color: #000000;
+
+  /* Channels */
+  --glass-rgb: 255 255 255;   /* frosted panel fill */
+  --ink-rgb: 0 0 0;           /* hairlines and tints drawn in the text color */
+  --rim-opacity: 1;           /* strength of the bright top edge on glass */
+
+  /* Inverse surfaces: hashtag chips, toast, featured card, active controls */
+  --inverse-rgb: 10 10 14;
+  --inverse-solid: #000000;
+  --on-inverse-rgb: 255 255 255;
+  --text-on-inverse: #FFFFFF;
+  --text-on-inverse-muted: #D4D4D8;
+
+  /* Controls */
+  --control-bg: #FFFFFF;
+
+  /* Service accordion */
+  --row-hover-bg: rgba(244, 245, 248, 0.65);
+  --row-active-bg: rgba(248, 249, 252, 0.85);
+  --drawer-bg: rgba(246, 247, 250, 0.85);
+
+  /* Footer */
+  --footer-bg: #000000;
+  --footer-border: #1C1C20;
+  --footer-divider: #222226;
+
+  /* Atmosphere */
+  --orb-1: radial-gradient(circle, rgba(225, 228, 238, 0.7) 0%, rgba(240, 242, 248, 0.25) 55%, transparent 70%);
+  --orb-2: radial-gradient(circle, rgba(220, 224, 235, 0.6) 0%, rgba(238, 240, 246, 0.2) 60%, transparent 70%);
+  --orb-3: radial-gradient(circle, rgba(230, 233, 242, 0.55) 0%, rgba(245, 246, 250, 0.2) 60%, transparent 70%);
+  --orb-4: radial-gradient(circle, rgba(225, 228, 236, 0.45) 0%, transparent 70%);
+  --noise-opacity: 0.032;
+  --noise-blend: multiply;
+
+  /* Black-on-transparent artwork (logos, glyphs, pixel art). invert(1) turns it white. */
+  --graphic-invert: invert(0);
+}

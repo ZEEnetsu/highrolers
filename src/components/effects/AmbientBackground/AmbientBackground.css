@@ -1,0 +1,83 @@
+/* Subtle Micro Dither Texture Overlay */
+.dither-noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: var(--noise-opacity);
+  mix-blend-mode: var(--noise-blend);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient Liquid Glass Atmosphere Layer (Refraction Depth for Frosted Glass Panels) */
+.glass-ambient-atmosphere {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glass-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.glass-ambient-orb.orb-1 {
+  width: 650px;
+  height: 650px;
+  top: -120px;
+  left: -80px;
+  background: var(--orb-1);
+  animation: orbDrift1 22s ease-in-out infinite alternate;
+}
+
+.glass-ambient-orb.orb-2 {
+  width: 750px;
+  height: 750px;
+  top: 32%;
+  right: -150px;
+  background: var(--orb-2);
+  animation: orbDrift2 26s ease-in-out infinite alternate;
+}
+
+.glass-ambient-orb.orb-3 {
+  width: 620px;
+  height: 620px;
+  bottom: 12%;
+  left: 6%;
+  background: var(--orb-3);
+  animation: orbDrift3 20s ease-in-out infinite alternate;
+}
+
+.glass-ambient-orb.orb-4 {
+  width: 500px;
+  height: 500px;
+  bottom: -80px;
+  right: 15%;
+  background: var(--orb-4);
+}
+
+@keyframes orbDrift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.08); }
+}
+
+@keyframes orbDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-50px, 60px) scale(1.05); }
+}
+
+@keyframes orbDrift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -50px) scale(0.95); }
+}
