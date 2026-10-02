@@ -1,0 +1,166 @@
+/* --------------------------------------------------------------------------
+   2×2 channel tiles (desktop)
+   -------------------------------------------------------------------------- */
+.contact-channels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-channel-motion {
+  display: flex;
+}
+
+.contact-channel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: rgb(var(--glass-rgb) / 0.78);
+  color: var(--text-strong);
+}
+
+/* Flip to the inverse surface on hover, like the capability pager cards */
+.contact-channel:hover {
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+  transform: translateY(-3px);
+}
+
+.contact-channel:hover .corner-tl,
+.contact-channel:hover .corner-tr,
+.contact-channel:hover .corner-bl,
+.contact-channel:hover .corner-br {
+  border-color: var(--text-on-inverse);
+}
+
+.contact-channel-icon {
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.contact-channel-icon .pixel-emblem,
+.contact-channel-icon-btn .pixel-emblem {
+  color: currentColor;
+}
+
+.contact-channel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact-channel-label,
+.contact-channel-hint {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+
+.contact-channel-link {
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.contact-channel-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.contact-channel-link:focus-visible {
+  outline: none;
+}
+
+.contact-channel-link:focus-visible::after {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.contact-channel-copy {
+  position: relative;
+  z-index: 2; /* above the stretched link */
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+  transition: opacity 160ms ease;
+}
+
+.contact-channel-copy svg {
+  width: 12px;
+  height: 12px;
+}
+
+.contact-channel-copy:hover,
+.contact-channel-copy:focus-visible {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Icon row (phones)
+   -------------------------------------------------------------------------- */
+.contact-channel-icons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  list-style: none;
+}
+
+.contact-channel-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgb(var(--ink-rgb) / 0.16);
+  background: rgb(var(--glass-rgb) / 0.7);
+  color: var(--text-strong);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.contact-channel-icon-btn .pixel-emblem {
+  width: 22px;
+}
+
+.contact-channel-icon-btn:active,
+.contact-channel-icon-btn:hover {
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+}
+
+.contact-channel-icon-label {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Short phones: icons only */
+@media (max-height: 760px) {
+  .contact-channel-icon-btn {
+    padding: 8px 6px;
+  }
+
+  .contact-channel-icon-label {
+    display: none;
+  }
+}

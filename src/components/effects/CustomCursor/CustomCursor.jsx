@@ -48,6 +48,15 @@ const INVERSE_SURFACE_SELECTOR = [
   '.service-explore-link',
   '.capability-tab.active',
   '.capability-cta-btn.is-primary',
+  '.contact-channel:hover',
+  '.contact-channel-icon-btn:hover',
+  '.contact-live',
+  '.enquiry-send',
+  '.enquiry-step-btn.is-primary',
+  '.enquiry-reach-badge.is-ready',
+  '.enquiry-error',
+  '.pixel-select-option.is-selected',
+  '.legal-toc-link.is-active',
 ].join(', ');
 
 /**

@@ -1,14 +1,14 @@
 @echo off
 cd /d "%~dp0"
-echo Starting HIGHROLERS Marketing Agency Web Server...
+echo Starting HIGHROLERS website...
 
 if not exist node_modules (
   echo Installing dependencies...
   call npm install || goto :error
 )
 
-call npm run build || goto :error
-node server.js --open
+rem Builds the site and opens it in the browser (Vite preview)
+call npm start || goto :error
 pause
 exit /b
 

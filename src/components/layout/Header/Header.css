@@ -92,11 +92,11 @@
 /* Small phones (iPhone SE, compact Android) */
 @media (max-width: 380px) {
   .main-nav-header .container {
-    padding: 0 14px;
+    padding: 0 12px;
   }
 
   .header-actions {
-    gap: 6px;
+    gap: 4px;
   }
 
   .brand-mark {

@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router';
 import { EASE_OUT_EXPO, fadeIn, fadeUp, revealOnScroll, scaleIn, stagger } from '../../../animations/variants.js';
-import { COPYRIGHT, LEGAL_LINKS, OFFICE } from '../../../data/site.js';
+import { COPYRIGHT, LEGAL_LINKS, MAPS_URL, OFFICE } from '../../../data/site.js';
+import { EMAIL, PHONE_DISPLAY, PHONE_URL, WHATSAPP_URL } from '../../../data/contact.js';
 import RotatingSeal from '../../ui/RotatingSeal/RotatingSeal.jsx';
 import './Footer.css';
 
@@ -18,12 +20,26 @@ export default function Footer() {
           <motion.div className="footer-col footer-col-address" variants={fadeUp}>
             <h4 className="footer-col-title">ADDRESS</h4>
             <div className="office-locations-list">
-              <a href='https://maps.app.goo.gl/njE5ynZRdKLzTVyQ6?g_st=iw' target="_blank" rel="noopener noreferrer" className="office-item">
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="office-item">
                 <span className="city-name">{OFFICE.city}</span>
                 <span className="office-addr">{OFFICE.address}</span>
                 <span className="office-addr office-pin">PIN: {OFFICE.pin}</span>
               </a>
             </div>
+          </motion.div>
+
+          <motion.div className="footer-col footer-col-contact" variants={fadeUp}>
+            <h4 className="footer-col-title">CONTACT</h4>
+            <ul className="footer-contact-list">
+              <li><a href={`mailto:${EMAIL}`} className="footer-contact-link">{EMAIL}</a></li>
+              <li><a href={PHONE_URL} className="footer-contact-link">{PHONE_DISPLAY}</a></li>
+              <li>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-contact-link">
+                  WHATSAPP <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li><Link to="/contact" className="footer-contact-cta">SEND AN ENQUIRY →</Link></li>
+            </ul>
           </motion.div>
 
           <motion.div className="footer-col text-center-mobile" variants={scaleIn}>
@@ -50,7 +66,7 @@ export default function Footer() {
             {LEGAL_LINKS.map((link, i) => (
               <Fragment key={link.label}>
                 {i > 0 && <span className="sep">•</span>}
-                <a href={link.href} className="legal-anchor">{link.label}</a>
+                <Link to={link.to} className="legal-anchor">{link.label}</Link>
               </Fragment>
             ))}
           </div>

@@ -1,0 +1,100 @@
+.enquiry-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 100%;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.enquiry-success-emblem {
+  width: clamp(72px, 12vh, 110px);
+  margin-bottom: 6px;
+}
+
+.enquiry-success-tag {
+  margin-bottom: 0;
+}
+
+.enquiry-success-heading:focus {
+  outline: none;
+}
+
+.enquiry-success-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, min(4.6vw, 8vh), 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.enquiry-success-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.enquiry-success-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+  width: 100%;
+  max-width: 520px;
+  margin: 14px 0 8px;
+  padding: 14px 0;
+  border-top: 1px dashed rgb(var(--ink-rgb) / 0.2);
+  border-bottom: 1px dashed rgb(var(--ink-rgb) / 0.2);
+  text-align: left;
+}
+
+.enquiry-success-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.enquiry-success-row dd {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+@media (max-width: 480px) {
+  .enquiry-success-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Inside the compact phone frame */
+.enquiry-frame.is-stepped .enquiry-success {
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.enquiry-frame.is-stepped .enquiry-success-emblem {
+  width: 60px;
+  margin-bottom: 2px;
+}
+
+.enquiry-frame.is-stepped .enquiry-success-title {
+  font-size: clamp(2rem, 9vw, 2.6rem);
+}
+
+.enquiry-frame.is-stepped .enquiry-success-text {
+  font-size: 1.05rem;
+}
+
+.enquiry-frame.is-stepped .enquiry-success-details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 14px;
+  margin: 6px 0 4px;
+  padding: 10px 0;
+}

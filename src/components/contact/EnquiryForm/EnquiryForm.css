@@ -1,0 +1,506 @@
+/* --------------------------------------------------------------------------
+   ENQUIRY TERMINAL
+   -------------------------------------------------------------------------- */
+.enquiry-frame-motion,
+.enquiry-frame-motion > div {
+  height: 100%;
+}
+
+.enquiry-frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(18px, 3vh, 28px) clamp(18px, 2.4vw, 32px);
+  border-radius: 6px;
+  background: rgb(var(--glass-rgb) / 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: inset 0 1px 1.5px 0 rgb(255 255 255 / calc(0.95 * var(--rim-opacity))),
+              0 24px 60px -12px rgba(0, 0, 0, 0.1);
+}
+
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.enquiry-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: clamp(10px, 1.6vh, 16px);
+  margin-bottom: clamp(10px, 1.8vh, 18px);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.enquiry-tag {
+  margin-bottom: 4px;
+}
+
+.enquiry-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, min(2.6vw, 4.4vh), 2.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+/* Live "required answers" meter */
+.enquiry-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.enquiry-meter-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.enquiry-meter-blocks {
+  display: flex;
+  gap: 3px;
+}
+
+.enquiry-meter-block {
+  width: 14px;
+  height: 8px;
+  background: rgb(var(--ink-rgb) / 0.12);
+  transition: background-color 250ms ease, transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.enquiry-meter-block.is-on {
+  background: var(--text-strong);
+  transform: scaleY(1.4);
+}
+
+/* --------------------------------------------------------------------------
+   FIELDS
+   -------------------------------------------------------------------------- */
+.enquiry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+}
+
+.enquiry-field-reach,
+.enquiry-field-message {
+  grid-column: 1 / -1;
+}
+
+.enquiry-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.enquiry-field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.enquiry-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-strong);
+}
+
+.enquiry-label-index,
+.enquiry-label-sep {
+  color: var(--text-dim);
+}
+
+.enquiry-required {
+  color: var(--text-strong);
+}
+
+.enquiry-optional {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.enquiry-input {
+  width: 100%;
+  min-height: clamp(40px, 5.6vh, 44px);
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--ink-rgb) / 0.18);
+  background: rgb(var(--glass-rgb) / 0.7);
+  color: var(--text-strong);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.enquiry-input::placeholder {
+  color: var(--text-dim);
+}
+
+.enquiry-input:hover {
+  border-color: rgb(var(--ink-rgb) / 0.45);
+}
+
+.enquiry-input:focus {
+  outline: none;
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 3px rgb(var(--ink-rgb) / 0.1);
+}
+
+.enquiry-input[aria-invalid='true'] {
+  border-color: var(--text-strong);
+  border-style: dashed;
+}
+
+/* Fixed-height slot keeps the layout still when errors appear */
+.enquiry-error-slot {
+  min-height: clamp(18px, 2.6vh, 22px);
+  padding-top: 3px;
+}
+
+.enquiry-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Phone OR email */
+.enquiry-reach-badge {
+  padding: 3px 9px;
+  border-radius: 980px;
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-strong);
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+.enquiry-reach-badge.is-ready {
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+}
+
+.enquiry-reach-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px;
+}
+
+.enquiry-reach-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.enquiry-sublabel {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.enquiry-reach-or {
+  padding-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.enquiry-textarea-wrap {
+  position: relative;
+}
+
+.enquiry-textarea {
+  display: block;
+  height: clamp(54px, 11vh, 120px);
+  padding: 10px 14px 22px;
+  resize: none;
+  line-height: 1.5;
+}
+
+.enquiry-counter {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER + SEND
+   -------------------------------------------------------------------------- */
+.enquiry-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.enquiry-consent {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.enquiry-consent a {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.enquiry-send {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 980px;
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.enquiry-send:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+}
+
+.enquiry-send:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.enquiry-send:disabled {
+  cursor: progress;
+}
+
+.enquiry-send:focus-visible {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+}
+
+.enquiry-send-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pixel stripes stream across while sending */
+.enquiry-send-fill {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-image: repeating-linear-gradient(90deg, rgb(var(--on-inverse-rgb) / 0.22) 0 6px, transparent 6px 12px);
+  background-size: 24px 100%;
+  transition: opacity 200ms ease;
+}
+
+.enquiry-send.is-sending .enquiry-send-fill {
+  opacity: 1;
+  animation: sendStream 0.6s linear infinite;
+}
+
+@keyframes sendStream {
+  from { background-position: 0 0; }
+  to { background-position: 24px 0; }
+}
+
+/* --------------------------------------------------------------------------
+   STEPPED LAYOUT (phones / short screens)
+   -------------------------------------------------------------------------- */
+.enquiry-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.enquiry-stepper-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-strong);
+}
+
+.enquiry-stepper-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.enquiry-stepper-seg {
+  height: 6px;
+  background-image: linear-gradient(90deg, rgb(var(--ink-rgb) / 0.14) 50%, transparent 50%);
+  background-size: 8px 6px;
+  transition: background-image 300ms ease;
+}
+
+.enquiry-stepper-seg.is-on {
+  background-image: linear-gradient(90deg, var(--text-strong) 50%, transparent 50%);
+}
+
+.enquiry-step-viewport {
+  overflow: hidden;
+  /* Room for open dropdowns */
+  padding-bottom: 4px;
+}
+
+.enquiry-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.enquiry-step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.enquiry-step-btn {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 980px;
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-strong);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease;
+}
+
+.enquiry-step-btn:hover {
+  background: rgb(var(--ink-rgb) / 0.06);
+}
+
+.enquiry-step-btn.is-primary {
+  background: var(--inverse-solid);
+  border-color: var(--inverse-solid);
+  color: var(--text-on-inverse);
+}
+
+.enquiry-step-btn:active {
+  transform: scale(0.96);
+}
+
+.enquiry-step-btn:focus-visible {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+}
+
+/* Phones: everything trimmed so each step fits one screen */
+.enquiry-frame.is-stepped {
+  padding: 16px;
+}
+
+.enquiry-frame.is-stepped .enquiry-head {
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.enquiry-frame.is-stepped .enquiry-title {
+  display: none; /* the step label says what to do */
+}
+
+.enquiry-frame.is-stepped .enquiry-tag {
+  margin-bottom: 0;
+}
+
+/* Error slots only take space when there is an error */
+.enquiry-frame.is-stepped .enquiry-error-slot {
+  min-height: 8px;
+}
+
+.enquiry-frame.is-stepped .enquiry-reach-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.enquiry-frame.is-stepped .enquiry-reach-or {
+  display: none;
+}
+
+.enquiry-frame.is-stepped .enquiry-input {
+  padding: 0 12px;
+  font-size: 0.86rem;
+}
+
+.enquiry-frame.is-stepped .enquiry-textarea {
+  height: 64px;
+  padding: 8px 12px 20px;
+}
+
+.enquiry-frame.is-stepped .enquiry-send {
+  padding: 0 20px;
+}
+
+.enquiry-frame.is-stepped .enquiry-consent {
+  text-align: center;
+}
+
+.enquiry-frame.is-stepped .contact-legal {
+  justify-content: center;
+  padding-top: 4px;
+}
+
+/* Step-mode dropdowns open over the nav buttons instead of being clipped */
+.enquiry-frame.is-stepped .enquiry-step-viewport:has(.pixel-select.is-open) {
+  overflow: visible;
+}
+
+/* Short phones (e.g. 360×740) */
+@media (max-height: 760px) {
+  .enquiry-frame.is-stepped .enquiry-stepper {
+    margin-bottom: 10px;
+  }
+
+  .enquiry-frame.is-stepped .enquiry-textarea {
+    height: 52px;
+  }
+}

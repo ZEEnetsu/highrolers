@@ -1,0 +1,105 @@
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2.4vh, 22px);
+  min-width: 0;
+}
+
+.contact-intro-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.contact-intro-tag {
+  margin-bottom: 0;
+}
+
+/* Blinking "online" status chip */
+.contact-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 980px;
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.contact-live-dot {
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+  animation: liveBlink 1.2s steps(2, jump-none) infinite;
+}
+
+@keyframes liveBlink {
+  0% { opacity: 1; }
+  100% { opacity: 0.15; }
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, min(5.6vw, 9vh), 6.2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.contact-pitch {
+  max-width: 480px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.contact-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.contact-legal-link {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--ink-rgb) / 0.25);
+  text-underline-offset: 3px;
+  transition: color 160ms ease;
+}
+
+.contact-legal-link:hover {
+  color: var(--text-strong);
+}
+
+/* Phones: headline + icon row only */
+.contact-intro.is-compact {
+  gap: 12px;
+}
+
+.contact-intro.is-compact .contact-title {
+  font-size: clamp(2rem, 9.5vw, 3.2rem);
+}
+
+.contact-intro.is-compact .contact-intro-tag {
+  font-size: 0.62rem;
+}
+
+@media (max-height: 760px) {
+  .contact-intro.is-compact .contact-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+}

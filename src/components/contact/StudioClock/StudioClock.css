@@ -1,0 +1,54 @@
+.studio-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--ink-rgb) / 0.14);
+  background: rgb(var(--glass-rgb) / 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: var(--font-mono);
+}
+
+.studio-clock-label,
+.studio-clock-day {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.studio-clock-time {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.studio-clock-slot {
+  position: relative;
+  display: inline-block;
+  width: 0.62em;
+  height: 1.2em;
+  overflow: hidden;
+  text-align: center;
+}
+
+.studio-clock-slot.is-colon {
+  width: 0.4em;
+}
+
+.studio-clock-char {
+  position: absolute;
+  inset: 0;
+  line-height: 1.2em;
+}
+
+.studio-clock-zone {
+  margin-left: 6px;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}

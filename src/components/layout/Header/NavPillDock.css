@@ -70,6 +70,10 @@
     padding: 3px 4px;
   }
 
+  .nav-pill-btn.is-mobile-hidden {
+    display: none;
+  }
+
   .nav-pill-btn {
     font-size: 0.62rem;
     letter-spacing: 0.04em;
@@ -80,6 +84,7 @@
 @media (max-width: 380px) {
   .nav-pill-btn {
     font-size: 0.56rem;
-    padding: 5px 6px;
+    letter-spacing: 0.02em;
+    padding: 5px 5px;
   }
 }

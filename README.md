@@ -1,31 +1,35 @@
 # HIGHROLERS — Marketing Agency Website
 
-React + Vite front end, served by a small Node.js (Express) server.
+A front-end-only React + Vite site — no server code. Build it once and host the `dist/` folder anywhere.
 Visual design follows the STARMEDIA Marketing Agency Behance design:
 https://www.behance.net/gallery/246021465/STARMEDIA-Marketing-Agency-Website-design
 
 ## Quick Start
 Requires **Node.js 20.19+**.
 
-- **Windows:** double-click `start.bat` (installs, builds, starts the server and opens the browser).
+- **Windows:** double-click `start.bat` (installs if needed, builds, and opens the site in your browser).
 - **Development** (hot reload): `npm install`, then `npm run dev` → http://localhost:5173
-- **Production:** `npm run build`, then `npm start` → http://127.0.0.1:8080
+- **Production preview:** `npm start` (= `npm run build` + `npm run preview`) → http://localhost:4173
+- **Deploy:** upload `dist/` to any static host (Netlify, Vercel, Cloudflare Pages, GitHub Pages, cPanel…).
+  Configure the host to serve `index.html` for unknown paths ("SPA fallback") so routes such as
+  `/contact` and `/capabilities/seo` load when opened directly.
 
-If port 8080 is busy (e.g. Apache/XAMPP), the server automatically moves to 8081, 8082, …
-and prints the address it is using. Set `PORT` to choose another start port.
+If a port is busy, Vite automatically picks the next free one and prints the address.
 
 ## Project Structure
 ```
-server.js                   Node.js server for the production build (dist/)
 index.html                  Vite entry: SEO meta, fonts, JSON-LD
+vite.config.js              Build / dev / preview settings
 public/assets/              Brand images, cursor, video (served as /assets/...)
 src/
   main.jsx, App.jsx         Entry point, router and animated page transitions
-  pages/                    HomePage, CapabilityPage (/capabilities/:slug), NotFoundPage
+  pages/                    HomePage, CapabilityPage, ContactPage, LegalPage, NotFoundPage
   animations/variants.js    Shared Motion presets (easing, reveals, staggers)
   context/                  ThemeContext (useTheme), ToastContext (useToast)
-  data/                     Page content: capabilities.js (all 19), themes.js, site.js …
-  hooks/                    useScrollSpy, useScrolled, useAutoplayVideo, usePageMeta
+  data/                     capabilities.js (all 19), contact.js, enquiry.js (form rules), legal/,
+                            navigation.js, themes.js, site.js
+  hooks/                    useScrollSpy, useScrolled, useAutoplayVideo, usePageMeta, useMediaQuery,
+                            useActiveSection
   utils/                    scrollToSection, themeTransition, format
   styles/                   Global layer: tokens, base/reset, utilities (bracket boxes, glass)
     themes/                 light.css, dark.css (all colors), transition.css (switch reveal)
@@ -35,8 +39,9 @@ src/
     sections/               Hero, Methodology, Services (+ CapabilityTabs), StudioShowcase, PixelDivider
     capability/             Detail-page blocks: Hero, Ticker, Sections, Callout, Flow, Statement,
                             Highlights, IdealFor, Pager, Cta (+ shared capability.css)
-    ui/                     BracketBox, RevealText, Toast, ThemeToggle, PixelEmblem, CountUp,
-                            SectionHeading, RotatingSeal
+    contact/                ContactIntro, ContactChannels, StudioClock, EnquiryForm, EnquirySuccess
+    ui/                     BracketBox, RevealText, Toast, ThemeToggle, PixelEmblem, PixelSelect,
+                            CountUp, SectionHeading, RotatingSeal
 ```
 Each component sits in its own folder with its own `.css` file. To edit copy or add a
 service/card, change the matching file in `src/data/` — no component changes needed.
@@ -54,6 +59,38 @@ drives the home accordion (`summary`, `tags`) and each page at `/capabilities/<s
   disappears.
 - **Add a capability:** append an object to `CAPABILITIES` (unique `slug`, `num`, `group`).
   It appears in the tabs, gets a page, and joins the previous/next chain automatically.
+
+## Contact Page & Enquiries
+`/contact` (CONTACT in the header) is a single-screen page: direct channels on the left (Gmail,
+phone, WhatsApp, address, live Patna clock) and the enquiry form on the right. On phones and short
+screens the form becomes 3 steps so it still fits without scrolling. Capability pages link to it
+with the service pre-selected (`/contact?service=<slug>`).
+
+- **Contact details:** edit `src/data/contact.js` (email, phone, WhatsApp) and `MAPS_URL` /
+  `OFFICE` in `src/data/site.js`. The contact page, footer and legal pages all read from there.
+- **Sending is simulated (front-end only):** the form validates in the browser, plays the
+  "TRANSMITTING…" animation and shows the thank-you screen with a reference number, but the
+  enquiry is **not delivered anywhere**.
+- **To receive real enquiries later:** replace `simulateSend()` in
+  `src/components/contact/EnquiryForm/useEnquiryForm.js` with a call to a form service (e.g.
+  Web3Forms, Formspree, EmailJS) or your own API that resolves to `{ reference }`. Nothing else
+  needs to change. Form options and validation live in `src/data/enquiry.js`.
+
+## Privacy Policy & Terms
+`/privacy-policy` and `/terms` share one page layout (`src/pages/LegalPage/`) with a sticky
+contents list. The text lives in `src/data/legal/privacyContent.js` and `src/data/legal/terms.js`
+as plain sections — edit the wording there and update the `updated` date. Linked from the footer
+and the contact page.
+
+## Smooth Scrolling
+The whole site scrolls with [Lenis](https://github.com/darkroomengineering/lenis), mounted once by
+`src/components/layout/SmoothScroll.jsx`. Tune the feel in `src/utils/smoothScroll.js`
+(`lerp` — lower is silkier; `JUMP.duration` for nav/back-to-top glides).
+
+- Use `scrollToY(y)` or `scrollToSection(id)` for programmatic scrolling — not `window.scrollTo`.
+- Phones keep native touch scrolling; "reduce motion" users get 1:1 scrolling automatically.
+- Inner scroll areas (dropdowns, tab rows) keep scrolling on their own; add `data-lenis-prevent`
+  to any new scrollable element if it ever passes the wheel through to the page.
 
 ## Hero Particles
 `PixelParticleField` draws square pixels in the theme's ink colour that drift, scatter away from

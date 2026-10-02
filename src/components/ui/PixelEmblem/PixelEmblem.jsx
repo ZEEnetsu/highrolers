@@ -48,16 +48,35 @@ function buildCells(seed) {
   return cells;
 }
 
+// Fixed artwork: rows of '#' (solid), '+' (ghost) and '.' (empty)
+function cellsFromPattern(pattern) {
+  const size = Math.max(pattern.length, ...pattern.map((row) => row.length));
+  const center = (size - 1) / 2;
+  const maxDist = Math.hypot(center, center) || 1;
+  const cells = [];
+  pattern.forEach((row, y) => {
+    [...row].forEach((ch, x) => {
+      if (ch === '.' || ch === ' ') return;
+      cells.push({ key: `${x}-${y}`, x, y, dist: Math.hypot(x - center, y - center) / maxDist, ghost: ch === '+' });
+    });
+  });
+  return { cells, size };
+}
+
 /**
- * Unique, symmetric pixel sigil generated from `seed` (e.g. a capability slug).
+ * Pixel sigil. Pass `seed` (e.g. a capability slug) for a unique generated,
+ * symmetric emblem, or `pattern` for fixed artwork such as icons.
  * Pixels pop in from the center outward; ghost pixels twinkle.
  */
-export default function PixelEmblem({ seed, className = '' }) {
-  const cells = useMemo(() => buildCells(seed), [seed]);
+export default function PixelEmblem({ seed, pattern, className = '' }) {
+  const { cells, size } = useMemo(
+    () => (pattern ? cellsFromPattern(pattern) : { cells: buildCells(seed), size: GRID }),
+    [seed, pattern]
+  );
 
   return (
     <motion.svg
-      viewBox={`0 0 ${GRID} ${GRID}`}
+      viewBox={`0 0 ${size} ${size}`}
       className={`pixel-emblem ${className}`.trim()}
       shapeRendering="crispEdges"
       aria-hidden="true"

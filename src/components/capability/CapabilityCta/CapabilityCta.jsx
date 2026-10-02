@@ -13,7 +13,9 @@ const CUSTOM_SLUG = 'custom-digital-solutions';
 
 export default function CapabilityCta({ current }) {
   const onCustomPage = current.slug === CUSTOM_SLUG;
-  const primary = onCustomPage
+  // Opens the contact form with this capability already selected
+  const enquiry = { to: `/contact?service=${current.slug}`, label: `ENQUIRE ABOUT ${current.short}` };
+  const secondary = onCustomPage
     ? { to: '/#services', label: 'EXPLORE ALL CAPABILITIES' }
     : { to: capabilityPath(CUSTOM_SLUG), label: 'START A CUSTOM SOLUTION' };
 
@@ -31,8 +33,11 @@ export default function CapabilityCta({ current }) {
               </p>
 
               <div className="capability-cta-actions">
-                <Link to={primary.to} className="capability-cta-btn is-primary">
-                  {primary.label} <span aria-hidden="true">→</span>
+                <Link to={enquiry.to} className="capability-cta-btn is-primary">
+                  {enquiry.label} <span aria-hidden="true">→</span>
+                </Link>
+                <Link to={secondary.to} className="capability-cta-btn">
+                  {secondary.label}
                 </Link>
                 <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="capability-cta-btn">
                   VISIT THE STUDIO <span aria-hidden="true">↗</span>

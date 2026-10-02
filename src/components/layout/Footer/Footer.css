@@ -63,6 +63,46 @@
   letter-spacing: 0.05em;
 }
 
+/* Contact column */
+.footer-contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-contact-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-on-dark-muted);
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.footer-contact-link:hover {
+  color: var(--text-on-dark);
+  padding-left: 4px;
+}
+
+.footer-contact-cta {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 980px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-on-dark);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.footer-contact-cta:hover {
+  background: var(--text-on-dark);
+  color: #000000;
+}
+
 /* Massive Brand Edge-to-Edge Logo */
 .footer-giant-brand-wrap {
   width: 100%;

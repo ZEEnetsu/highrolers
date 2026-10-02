@@ -86,7 +86,9 @@
           "postalCode": "800014",
           "addressCountry": "IN"
         },
-        "hasMap": "https://maps.app.goo.gl/E9gScduacyQdguJ67",
+        "hasMap": "https://maps.app.goo.gl/njE5ynZRdKLzTVyQ6?g_st=iw",
+        "email": "highrolers.sg@gmail.com",
+        "telephone": "+91-95087-04701",
         "areaServed": ["Global", "India", "United States", "Latin America"],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -157,6 +159,56 @@
 </head>
 <body class="theme-highrolers">
   <div id="root"></div>
+
+  <noscript>
+    <p style="font-family: monospace; padding: 40px; text-align: center;">HIGHROLERS needs JavaScript enabled to load.</p>
+  </noscript>
+
+  <!-- Boot watchdog: if the app fails to start (e.g. a script failed to load or a stale
+       dev-server cache), show the reason and a reload button instead of a blank screen.
+       React clears this message as soon as the app mounts. -->
+  <script>
+    (function () {
+      var BOOT_TIMEOUT_MS = 8000;
+      var problems = [];
+
+      window.addEventListener('error', function (event) {
+        var target = event.target;
+        var failedFile = target && target !== window && (target.src || target.href);
+        problems.push(failedFile ? 'Failed to load ' + failedFile : event.message || 'Unknown error');
+      }, true);
+
+      window.addEventListener('unhandledrejection', function (event) {
+        var reason = event.reason;
+        problems.push(String((reason && reason.message) || reason));
+      });
+
+      window.setTimeout(function () {
+        var root = document.getElementById('root');
+        if (!root || root.childElementCount > 0) return;
+
+        var details = problems.length
+          ? problems.slice(0, 4).map(function (p) {
+              return p.replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; });
+            }).join('<br>')
+          : 'No error was reported — the scripts may still be loading.';
+
+        root.innerHTML =
+          '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;' +
+          'background:#0A0A0C;color:#F4F4F5;font-family:monospace;text-align:center">' +
+          '<div style="max-width:560px">' +
+          '<p style="letter-spacing:.14em;font-size:12px;opacity:.6">[ HIGHROLERS // BOOT ERROR ]</p>' +
+          '<h1 style="font-size:28px;margin:12px 0">The page didn\'t load correctly.</h1>' +
+          '<p style="font-size:13px;line-height:1.6;opacity:.8">Please refresh. If it keeps happening, do a hard refresh ' +
+          '(Ctrl+Shift+R, or Cmd+Shift+R on Mac).</p>' +
+          '<p style="font-size:11px;line-height:1.6;opacity:.5;margin-top:16px;word-break:break-all">' + details + '</p>' +
+          '<button onclick="location.reload()" style="margin-top:20px;padding:12px 24px;border-radius:999px;border:0;' +
+          'background:#fff;color:#000;font:700 12px monospace;letter-spacing:.1em;cursor:pointer">RELOAD</button>' +
+          '</div></div>';
+      }, BOOT_TIMEOUT_MS);
+    })();
+  </script>
+
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
