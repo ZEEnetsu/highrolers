@@ -14,11 +14,11 @@ export const THEMES = [
   { id: 'dark', label: 'Dark', metaColor: '#0A0A0C' },
 ];
 
-// Used when there is no saved choice and the OS preference is ignored or unavailable
-export const DEFAULT_THEME = 'light';
+// First-time visitors (no saved choice) start in this theme
+export const DEFAULT_THEME = 'dark';
 
-// When true, first-time visitors get their OS light/dark setting until they pick one
-export const FOLLOW_SYSTEM = true;
+// When true, first-time visitors get their OS light/dark setting instead of DEFAULT_THEME
+export const FOLLOW_SYSTEM = false;
 
 export const THEME_STORAGE_KEY = 'highrolers-theme';
 

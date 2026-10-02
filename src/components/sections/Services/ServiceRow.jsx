@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Link } from 'react-router';
 import { EASE_OUT_EXPO, fadeUp, stagger } from '../../../animations/variants.js';
+import { capabilityPath } from '../../../data/capabilities.js';
 import { useToast } from '../../../context/ToastContext.jsx';
 
 const drawerTransition = { duration: 0.5, ease: EASE_OUT_EXPO };
@@ -29,11 +31,12 @@ function ArrowIcon() {
   );
 }
 
-export default function ServiceRow({ service, isOpen, onToggle }) {
-  const { id, num, name, description, tags } = service;
+export default function ServiceRow({ capability, isOpen, onToggle }) {
+  const { slug, num, name, summary, tags, sections } = capability;
   const showToast = useToast();
   const [selectedTags, setSelectedTags] = useState(() => new Set());
-  const drawerId = `service-drawer-${id}`;
+  const drawerId = `service-drawer-${slug}`;
+  const serviceCount = sections.reduce((total, section) => total + section.items.length, 0);
 
   const toggleTag = (tag) => {
     setSelectedTags((current) => {
@@ -75,7 +78,7 @@ export default function ServiceRow({ service, isOpen, onToggle }) {
               transition={drawerTransition}
             >
               <div className="service-content-grid">
-                <div className="service-desc-text">{description}</div>
+                <div className="service-desc-text">{summary}</div>
                 <motion.div className="service-tags-list" variants={stagger(0.05, 0.12)} initial="hidden" animate="visible">
                   {tags.map((tag) => (
                     <motion.span key={tag} className="pill-tag-motion" variants={pillIn}>
@@ -90,6 +93,12 @@ export default function ServiceRow({ service, isOpen, onToggle }) {
                     </motion.span>
                   ))}
                 </motion.div>
+                <div className="service-drawer-footer">
+                  <span className="service-drawer-meta">[ {serviceCount} SERVICES INSIDE ]</span>
+                  <Link to={capabilityPath(slug)} className="service-explore-link">
+                    EXPLORE CAPABILITY <span className="service-explore-arrow" aria-hidden="true">→</span>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

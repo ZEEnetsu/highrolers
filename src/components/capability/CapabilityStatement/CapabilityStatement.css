@@ -1,0 +1,58 @@
+.capability-statement-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.capability-statement-text {
+  max-width: 360px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--text-secondary);
+}
+
+.capability-statement-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.capability-statement-line {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.capability-statement-line.is-right {
+  text-align: right;
+}
+
+.capability-statement-line.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-strong);
+}
+
+@media (max-width: 768px) {
+  .capability-statement-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .capability-statement-text {
+    text-align: left;
+  }
+
+  .capability-statement-line.is-right {
+    text-align: left;
+  }
+}

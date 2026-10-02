@@ -1,0 +1,26 @@
+.capability-ideal {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.capability-ideal-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+}
+
+/* Larger variant of the shared .pill-tag (Services.css) */
+.capability-ideal-pill {
+  padding: 12px 22px;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 768px) {
+  .capability-ideal {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

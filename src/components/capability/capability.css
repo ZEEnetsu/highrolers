@@ -1,0 +1,63 @@
+/* --------------------------------------------------------------------------
+   Shared by the capability detail blocks
+   -------------------------------------------------------------------------- */
+.capability-section {
+  position: relative;
+  z-index: 1;
+  padding: 36px 0;
+}
+
+/* Frosted bracket frame — same recipe as the home Methodology/Services frames */
+.capability-frame {
+  padding: 48px;
+  border: 1px solid var(--border-strong);
+  background: rgb(var(--glass-rgb) / 0.76);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: inset 0 1px 1.5px 0 rgb(255 255 255 / calc(0.95 * var(--rim-opacity))),
+              0 24px 60px -12px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* Inverse panel (dark in light theme, light in dark theme) */
+.capability-inverse {
+  background: rgb(var(--inverse-rgb) / 0.92);
+  color: var(--text-on-inverse);
+  border-color: rgb(var(--on-inverse-rgb) / 0.2);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25), 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.capability-inverse:hover {
+  background: rgb(var(--inverse-rgb) / 0.96);
+}
+
+.capability-inverse .section-tag {
+  color: var(--text-on-inverse);
+}
+
+.capability-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text-strong);
+  text-transform: uppercase;
+}
+
+.capability-body-text {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.62;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .capability-section {
+    padding: 24px 0;
+  }
+
+  .capability-frame {
+    padding: 28px 20px;
+  }
+}

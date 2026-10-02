@@ -1,16 +1,44 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { fadeUp, revealOnScroll, stagger } from '../../../animations/variants.js';
-import { DEFAULT_OPEN_SERVICE, SERVICES } from '../../../data/services.js';
+import { CAPABILITIES, CAPABILITY_GROUPS, DEFAULT_OPEN_CAPABILITY } from '../../../data/capabilities.js';
 import BracketBox from '../../ui/BracketBox/BracketBox.jsx';
 import RevealText from '../../ui/RevealText/RevealText.jsx';
+import CapabilityTabs from './CapabilityTabs.jsx';
 import ServiceRow from './ServiceRow.jsx';
 import './Services.css';
 
-export default function Services() {
-  const [openId, setOpenId] = useState(DEFAULT_OPEN_SERVICE);
+const ALL_TAB = 'all';
+const LIST_ID = 'capabilities-list';
 
-  const toggle = (id) => setOpenId((current) => (current === id ? null : id));
+const TABS = [
+  { id: ALL_TAB, label: 'ALL', title: 'All capabilities', count: CAPABILITIES.length },
+  ...CAPABILITY_GROUPS.map((group) => ({
+    id: group.id,
+    label: group.label,
+    title: group.title,
+    count: CAPABILITIES.filter((c) => c.group === group.id).length,
+  })),
+];
+
+const capabilitiesIn = (tabId) =>
+  tabId === ALL_TAB ? CAPABILITIES : CAPABILITIES.filter((c) => c.group === tabId);
+
+const listExit = { opacity: 0, y: -8, transition: { duration: 0.18 } };
+
+export default function Services() {
+  const [activeTab, setActiveTab] = useState(ALL_TAB);
+  const [openSlug, setOpenSlug] = useState(DEFAULT_OPEN_CAPABILITY);
+  const visible = capabilitiesIn(activeTab);
+
+  const toggle = (slug) => setOpenSlug((current) => (current === slug ? null : slug));
+
+  // Keep the open row if it is still listed, otherwise open the first one in the tab
+  const selectTab = (tabId) => {
+    const list = capabilitiesIn(tabId);
+    setActiveTab(tabId);
+    setOpenSlug((current) => (list.some((c) => c.slug === current) ? current : list[0]?.slug ?? null));
+  };
 
   return (
     <section className="services-section" id="services">
@@ -47,16 +75,34 @@ export default function Services() {
               </div>
             </div>
 
-            <motion.div className="services-interactive-list" variants={stagger(0.08)} {...revealOnScroll(0.1)}>
-              {SERVICES.map((service) => (
-                <ServiceRow
-                  key={service.id}
-                  service={service}
-                  isOpen={openId === service.id}
-                  onToggle={() => toggle(service.id)}
-                />
-              ))}
-            </motion.div>
+            <div className="services-filter-row">
+              <CapabilityTabs tabs={TABS} activeId={activeTab} onChange={selectTab} controls={LIST_ID} />
+              <span className="services-filter-count" aria-live="polite">
+                SHOWING {String(visible.length).padStart(2, '0')} / {String(CAPABILITIES.length).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* Keyed by tab so each switch replays the staggered cascade */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeTab}
+                id={LIST_ID}
+                role="tabpanel"
+                className="services-interactive-list"
+                variants={stagger(0.06)}
+                exit={listExit}
+                {...revealOnScroll(0.05)}
+              >
+                {visible.map((capability) => (
+                  <ServiceRow
+                    key={capability.slug}
+                    capability={capability}
+                    isOpen={openSlug === capability.slug}
+                    onToggle={() => toggle(capability.slug)}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </BracketBox>
         </motion.div>
       </div>

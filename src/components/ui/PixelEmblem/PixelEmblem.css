@@ -1,0 +1,18 @@
+.pixel-emblem {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--text-strong);
+}
+
+/* Ghost pixels flicker like a dithered display (fill-opacity, so Motion keeps opacity) */
+.pixel-emblem-ghost {
+  fill-opacity: 0.3;
+  animation: emblemTwinkle 2.6s ease-in-out infinite;
+}
+
+@keyframes emblemTwinkle {
+  0%, 100% { fill-opacity: 0.25; }
+  50% { fill-opacity: 0.85; }
+}

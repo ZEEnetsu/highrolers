@@ -16,21 +16,22 @@
   <!-- Geo & Theme -->
   <meta name="geo.region" content="IN-BR">
   <meta name="geo.placename" content="Patna">
-  <meta name="theme-color" content="#FFFFFF">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0A0A0C">
+  <meta name="color-scheme" content="dark light">
 
   <!-- Theme boot: set data-theme before first paint so there is no light/dark flash.
-       Mirrors THEME_STORAGE_KEY / FOLLOW_SYSTEM / metaColor in src/data/themes.js. -->
+       Mirrors THEME_STORAGE_KEY / DEFAULT_THEME / metaColor in src/data/themes.js.
+       First-time visitors start in dark; a saved choice always wins. -->
   <script>
     (function () {
       var theme;
       try { theme = localStorage.getItem('highrolers-theme'); } catch (e) {}
       if (theme !== 'light' && theme !== 'dark') {
-        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        theme = 'dark';
       }
       document.documentElement.setAttribute('data-theme', theme);
-      if (theme === 'dark') {
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0A0A0C');
+      if (theme === 'light') {
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FFFFFF');
       }
     })();
   </script>

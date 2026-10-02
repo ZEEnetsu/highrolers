@@ -1,0 +1,46 @@
+.not-found {
+  padding: 60px 0;
+}
+
+.not-found-frame {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found-emblem {
+  width: 120px;
+  margin-bottom: 24px;
+}
+
+.not-found-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 9vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--text-strong);
+}
+
+.not-found-text {
+  max-width: 460px;
+  margin-top: 14px;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}

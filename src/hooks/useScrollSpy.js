@@ -7,11 +7,13 @@ const THROTTLE_MS = 50;
  * Tracks which section the user is reading. Returns [activeId, setActiveId]
  * so a nav click can mark its target active right away.
  * `sectionIds` must be a stable array (define it outside the component).
+ * Pass `enabled = false` to pause tracking (e.g. on pages without those sections).
  */
-export function useScrollSpy(sectionIds) {
+export function useScrollSpy(sectionIds, enabled = true) {
   const [activeId, setActiveId] = useState(sectionIds[0]);
 
   useEffect(() => {
+    if (!enabled) return undefined;
     let timeout = null;
 
     const update = () => {
@@ -42,7 +44,7 @@ export function useScrollSpy(sectionIds) {
       window.removeEventListener('scroll', onScroll);
       clearTimeout(timeout);
     };
-  }, [sectionIds]);
+  }, [sectionIds, enabled]);
 
   return [activeId, setActiveId];
 }

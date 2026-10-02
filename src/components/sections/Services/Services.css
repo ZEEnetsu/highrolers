@@ -255,6 +255,158 @@
 }
 
 /* --------------------------------------------------------------------------
+   CATEGORY TABS — glass track like the header nav, inverse active pill
+   -------------------------------------------------------------------------- */
+.services-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0 8px;
+}
+
+.capability-tabs {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 980px;
+  background: rgb(var(--ink-rgb) / 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--ink-rgb) / 0.08);
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / calc(0.9 * var(--rim-opacity))), 0 2px 8px rgba(0, 0, 0, 0.02);
+  isolation: isolate;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.capability-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.capability-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 980px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nav-text);
+  white-space: nowrap;
+  transition: color 180ms ease, transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.capability-tab:hover {
+  color: var(--text-strong);
+}
+
+.capability-tab:active {
+  transform: scale(0.95);
+}
+
+.capability-tab.active {
+  color: var(--text-on-inverse);
+}
+
+.capability-tab-pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--inverse-solid);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.capability-tab-count {
+  font-size: 0.62rem;
+  font-weight: 600;
+  opacity: 0.55;
+}
+
+.capability-tab:focus-visible {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 2px;
+}
+
+.services-filter-count {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+/* --------------------------------------------------------------------------
+   DRAWER FOOTER — link to the capability's detail page
+   -------------------------------------------------------------------------- */
+.service-drawer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px dashed rgb(var(--ink-rgb) / 0.15);
+}
+
+.service-drawer-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.service-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  min-height: 42px;
+  border-radius: 980px;
+  background: var(--inverse-solid);
+  color: var(--text-on-inverse);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.service-explore-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.service-explore-link:active {
+  transform: scale(0.96);
+}
+
+.service-explore-arrow {
+  display: inline-block;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-explore-link:hover .service-explore-arrow {
+  transform: translateX(4px);
+}
+
+.service-explore-link:focus-visible {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
    RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
@@ -267,5 +419,19 @@
   }
   .editorial-headline-services.right-text {
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .services-filter-count {
+    text-align: center;
+  }
+  .service-drawer-footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

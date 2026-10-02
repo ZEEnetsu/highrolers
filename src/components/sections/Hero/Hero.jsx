@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { EASE_OUT_EXPO, SPRING_BOUNCY } from '../../../animations/variants.js';
 import RevealText from '../../ui/RevealText/RevealText.jsx';
 import PixelMatrixCanvas from '../../effects/PixelMatrixCanvas/PixelMatrixCanvas.jsx';
+import PixelParticleField from '../../effects/PixelParticleField/PixelParticleField.jsx';
 import AudienceBanner from './AudienceBanner.jsx';
 import './Hero.css';
 
@@ -10,6 +11,8 @@ const HASHTAGS = ['WE HELP', 'TO'];
 export default function Hero() {
   return (
     <section className="hero-section" id="hero">
+      <PixelParticleField />
+
       <div className="container hero-container">
         <div className="hero-headline-block">
           <div className="hero-hashtag-wrap">

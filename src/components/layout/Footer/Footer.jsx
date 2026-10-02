@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { motion } from 'motion/react';
 import { EASE_OUT_EXPO, fadeIn, fadeUp, revealOnScroll, scaleIn, stagger } from '../../../animations/variants.js';
 import { COPYRIGHT, LEGAL_LINKS, OFFICE } from '../../../data/site.js';
-import FooterSeal from './FooterSeal.jsx';
+import RotatingSeal from '../../ui/RotatingSeal/RotatingSeal.jsx';
 import './Footer.css';
 
 const logoReveal = {
@@ -18,16 +18,16 @@ export default function Footer() {
           <motion.div className="footer-col footer-col-address" variants={fadeUp}>
             <h4 className="footer-col-title">ADDRESS</h4>
             <div className="office-locations-list">
-              <div className="office-item">
+              <a href='https://maps.app.goo.gl/njE5ynZRdKLzTVyQ6?g_st=iw' target="_blank" rel="noopener noreferrer" className="office-item">
                 <span className="city-name">{OFFICE.city}</span>
                 <span className="office-addr">{OFFICE.address}</span>
                 <span className="office-addr office-pin">PIN: {OFFICE.pin}</span>
-              </div>
+              </a>
             </div>
           </motion.div>
 
           <motion.div className="footer-col text-center-mobile" variants={scaleIn}>
-            <FooterSeal />
+            <RotatingSeal pathId="footer-seal-path" />
           </motion.div>
         </motion.div>
 

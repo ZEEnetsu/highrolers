@@ -63,34 +63,6 @@
   letter-spacing: 0.05em;
 }
 
-/* Footer Seal — Clean Floating Minimalist Ring */
-.footer-seal-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.seal-rotating {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  animation: spinSlow 30s linear infinite;
-}
-
-.seal-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.seal-inner-star {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-  color: var(--text-on-dark);
-}
-
 /* Massive Brand Edge-to-Edge Logo */
 .footer-giant-brand-wrap {
   width: 100%;

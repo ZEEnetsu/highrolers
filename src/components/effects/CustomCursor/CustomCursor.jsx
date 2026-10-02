@@ -41,6 +41,13 @@ const INVERSE_SURFACE_SELECTOR = [
   '.pill-tag:hover',
   '.pill-tag.selected',
   '.theme-toggle-knob',
+  '.inverse-surface',
+  '.capability-flow-chip.is-lit',
+  '.capability-pager-card:hover',
+  '.capability-related-link:hover',
+  '.service-explore-link',
+  '.capability-tab.active',
+  '.capability-cta-btn.is-primary',
 ].join(', ');
 
 /**
